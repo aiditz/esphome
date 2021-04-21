@@ -29,14 +29,14 @@ void AHT10Component::setup() {
   ESP_LOGCONFIG(TAG, "Setting up AHT10...");
 
   if (!this->write_bytes(0, AHT10_CALIBRATE_CMD, sizeof(AHT10_CALIBRATE_CMD))) {
-    ESP_LOGE(TAG, "Communication with AHT10 failed!");
-    this->mark_failed();
+    // ESP_LOGE(TAG, "Communication with AHT10 failed!");
+    // this->mark_failed();
     return;
   }
   uint8_t data;
   if (!this->read_byte(0, &data, AHT10_DEFAULT_DELAY)) {
-    ESP_LOGD(TAG, "Communication with AHT10 failed!");
-    this->mark_failed();
+    // ESP_LOGD(TAG, "Communication with AHT10 failed!");
+    // this->mark_failed();
     return;
   }
   if ((data & 0x68) != 0x08) {  // Bit[6:5] = 0b00, NORMAL mode and Bit[3] = 0b1, CALIBRATED
