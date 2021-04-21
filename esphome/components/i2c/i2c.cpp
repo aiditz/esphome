@@ -25,6 +25,7 @@ void I2CComponent::setup() {
   this->wire_->setClock(this->frequency_);
 }
 void I2CComponent::dump_config() {
+  this->setup();
   ESP_LOGCONFIG(TAG, "I2C Bus:");
   ESP_LOGCONFIG(TAG, "  SDA Pin: GPIO%u", this->sda_pin_);
   ESP_LOGCONFIG(TAG, "  SCL Pin: GPIO%u", this->scl_pin_);
@@ -54,6 +55,7 @@ float I2CComponent::get_setup_priority() const { return setup_priority::BUS; }
 
 void I2CComponent::raw_begin_transmission(uint8_t address) {
   ESP_LOGVV(TAG, "Beginning Transmission to 0x%02X:", address);
+  this->setup();
   this->wire_->beginTransmission(address);
 }
 bool I2CComponent::raw_end_transmission(uint8_t address, bool send_stop) {
